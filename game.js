@@ -193,7 +193,7 @@ function tick(now) {
   lastTime = now;
 
   if (!finished) {
-    let power = 1;   // 다리 움직임 빠르기 (1 = 제 속도, 0 = 멈춤)
+    let power = 0;   // 다리 움직임 빠르기 (1 = 제 속도, 0 = 멈춤) — 첫 단어 전에는 말1 그림으로 정지
     if (started) {
       idle += dt;
       const { dist, speed } = segmentAt(idle);
