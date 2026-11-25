@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>끝말잇기 경주로</title>
+  <!-- Adobe Fonts 웹 프로젝트: YoonA 머리정체 (font-family: yoon-a-meolijeongche) -->
+  <script>
+    (function(d) {
+      var config = {
+        kitId: 'jwg3top',
+        scriptTimeout: 3000,
+        async: true
+      },
+      h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+    })(document);
+  </script>
+  <!-- 머리정체를 못 불러올 때 대신 쓸 굵은 글꼴 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main id="board">
+    <!-- 구불구불한 길: 굵은 선(테두리) 위에 배경색 선을 겹쳐 위아래 두 줄 테두리를 만들고, 그 위에 단어를 곡선을 따라 씁니다 -->
+    <svg id="track" xmlns="http://www.w3.org/2000/svg">
+      <defs><path id="route" /></defs>
+      <use id="edge-outer" href="#route" />
+      <use id="edge-inner" href="#route" />
+      <text id="road-text" dy="0.34em"><textPath id="road-path" href="#route" startOffset="14"></textPath></text>
+      <text id="goal" text-anchor="middle">🏁</text>
+    </svg>
+    <div id="horse" class="horse">
+      <!-- 직접 그린 말 3프레임(assets/horse1~3.png)을 번갈아 보여 줍니다 -->
+      <img id="horse-img" src="assets/horse1.png" alt="말" />
+    </div>
+  </main>
+
+  <footer id="controls">
+    <div id="hint"></div>
+    <form id="word-form" autocomplete="off">
+      <input id="word-input" type="text" placeholder="단어 입력 후 Enter" maxlength="12" autofocus />
+      <button type="submit">잇기</button>
+    </form>
+    <div id="message" role="status"></div>
+  </footer>
+
+  <!-- 게임 끝 화면 (실패 / 도착) -->
+  <div id="overlay" hidden>
+    <div class="panel">
+      <h2 id="overlay-title">게임 실패</h2>
+      <p id="overlay-text"></p>
+      <button id="retry" type="button">다시하기</button>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
